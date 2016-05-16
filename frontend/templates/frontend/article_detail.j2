@@ -1,0 +1,40 @@
+{% extends 'frontend/base.j2' %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+    <div>
+        <article class="hentry" role="article">
+            <header>
+                <h1 class="entry-title">{{ article.title }}</h1>
+
+                <p class="meta">{% include 'frontend/_includes/inc_article_time.j2' %}</p>
+                {#          <p class="meta">{% include 'frontend/_includes/article_time.html' %}</p>#}
+            </header>
+            {% if article.github_url %}
+            <span id="forkongithub">
+                <a target="_blank" href="{{ article.github_url }}">{{ _('Fork me on GitHub') }}</a>
+            </span>
+            {% endif %}
+
+            <div class="entry-content">
+                {{ article.content|markdown }}
+            </div>
+            <footer>
+                {% include 'frontend/_includes/article_infos.html' %}
+            </footer>
+
+            {#    {% include 'frontend/_includes/article.html' %}#}
+            {#    <footer>#}
+            {#      {% include 'frontend/_includes/article_infos.html' %}#}
+            {#      {% include 'frontend/_includes/sharing.html' %}#}
+            {#    </footer>#}
+        </article>
+
+        {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+            <section>
+                <h1>Comments</h1>
+
+                <div id="disqus_thread" aria-live="polite">{% include 'frontend/_includes/disqus_thread.html' %}</div>
+            </section>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+<aside class="sidebar">
+    {% if SIDEBAR_IMAGE %}
+        <section>
+            {#	  <img src="{{ SITEURL }}/{{ SIDEBAR_IMAGE }}" alt="{{ SIDEBAR_IMAGE_ALT}}" width="{{SIDEBAR_IMAGE_WIDTH}}"/> #}
+        </section>
+    {% endif %}
+    <section>
+        <h1>{{ _('Recent Posts') }}</h1>
+        <ul id="recent_posts">
+            {% for article in tag_article_list() %}
+                <li class="post">
+                    <a href="{{ article.url }}">{{ article.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+
+        <h1>{{ _('Categories') }}</h1>
+        <ul id="recent_posts">
+            {% for category in tag_category_list() %}
+                <li><a href="{{ category.url }}">{{ category.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    {% if tag_list %}
+    <section>
+        <h1>{{ _('Tags') }}</h1>
+        {% for tag in tag_list %}
+            <a href="{{ tag.url }}">{{ tag.title }}</a>{% if not loop.last %},{% endif %}
+        {% endfor %}
+    </section>
+    {% endif %}
+
+{#    {%  include 'frontend/_includes/github.html' %}#}
+{#    {%  include 'frontend/_includes/social.html' %}#}
+{#    {%  include 'frontend/_includes/links.html' %}#}
+{#    {%  include 'frontend/_includes/twitter_sidebar.html' %}#}
+{#    {%  include 'frontend/_includes/gplus_sidebar.html' %}#}
+</aside>

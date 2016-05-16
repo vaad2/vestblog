@@ -1,0 +1,15 @@
+{% if poll_list|length() %}
+    <h3>Какие статьи хотелось бы увидеть в 1-ю очередь?</h3>
+    {% for poll in poll_list %}
+        <div data-vt="poll-{{ poll.pk }}">
+            {{ poll.title }} <small>( за: {{ poll.num_votes }} )</small>
+            <div class="pull-right">
+                {% if poll.is_voted %}
+                    <a data-vt="unvote" data-pk="{{ poll.pk }}" href="javascript:void(0)">{{ _('UnVote!') }}</a>
+                {% else %}
+                    <a data-vt="vote" data-pk="{{ poll.pk }}" href="javascript:void(0)">{{ _('Vote!') }}</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

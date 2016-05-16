@@ -1,0 +1,17 @@
+{% extends 'frontend/base.j2' %}
+{% block title %}Упс{% endblock %}
+{% block content %}
+    <div>
+        <article class="hentry" role="article">
+            ниче найдено
+        </article>
+
+        {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+            <section>
+                <h1>Comments</h1>
+
+                <div id="disqus_thread" aria-live="polite">{% include 'frontend/_includes/disqus_thread.html' %}</div>
+            </section>
+        {% endif %}
+    </div>
+{% endblock %}

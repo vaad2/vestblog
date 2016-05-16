@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="application/javascript" src="/static/js/knockout-3.2.0.js"></script>
+    <script src="/static/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript">
+        ko.bindingHandlers.arrayValue = {
+            init: function (element, valueAccessor, allBindingsAccessor, data) {
+                var item = valueAccessor().split(':');
+
+                //create the observable, if it doesn't exist
+
+                if (!data[item[0]]) {
+                    console.log('init ')
+                    data[item[0]] = ko.observableArray();
+                }
+
+                var s_item = ko.observable({val:item[1]});
+                data[item[0]].push(s_item);
+
+
+                ko.applyBindingsToNode(element, {value: data[item[0]] });
+            }
+        };
+
+
+        $(function () {
+            {#            var nodes = [];#}
+            {#            $('.rx-item').each(function () {#}
+            {#                nodes.push(this);#}
+            {#            })#}
+
+            {#            ko.components.register('my-component', {#}
+            {#                template: nodes,#}
+            {#                viewModel: function () {#}
+            {#                    var self = this;#}
+            {#                    self.clickHandler = function () {#}
+            {#                        console.log('click!!!');#}
+            {#                    }#}
+            {##}
+            {#                }#}
+            {#            });#}
+            function ItemsModel() {
+                var self = this;
+
+                self.prp = ko.observableArray();
+                $('.rx-item').each(function () {
+
+
+                })
+                self.clickHandler = function () {
+                    console.log('click');
+                }
+
+                self.itemRemove = function(data, el){
+                    console.log(data, el);
+{#                    self.prp.splice(0,1);#}
+                    console.log(self.prp()[0]());
+                    console.log(self.prp()[0].element)
+{#                    $(self.prp()[0]().element).remove();#}
+{#                    self.prp.splice(0,1);#}
+                    self.prp()[0]({val : 'zzzz'})
+                }
+            }
+
+            var vm = new ItemsModel();
+            ko.applyBindings(vm);
+        })
+    </script>
+</head>
+<body>
+
+<div data-bind="text:ko.toJSON(prp)"></div>
+
+<div class="rx-item" data-bind="arrayValue: 'prp:33', text: prp()[0]().val">
+    cp1
+</div>
+
+<div class="rx-item" data-bind="arrayValue: 'prp:4'">
+    cp1
+</div>
+
+<div class="rx-item" data-bind="arrayValue: 'prp:5'">
+    cp1
+</div>
+
+
+<input type="button" data-bind="click: itemRemove"/>
+</body>
+</html>

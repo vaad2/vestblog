@@ -1,0 +1,14 @@
+{% extends 'frontend/base.j2' %}
+{% block content %}
+    {% set index=True %}
+    <div class="blog-index">
+        {% if article_list %}
+            {% for article in article_list %}
+                <article>
+                    {% include 'frontend/_includes/inc_article.j2' %}
+                </article>
+            {% endfor %}
+            {#  	{% include 'frontend/_includes/pagination.html' %}#}
+        {% endif %}
+    </div>
+{% endblock %}

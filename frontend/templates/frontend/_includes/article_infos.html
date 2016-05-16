@@ -1,0 +1,13 @@
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">LD</span>
+  </span>
+  {% include 'frontend/_includes/inc_article_time.j2' %}
+  {% if article.tag %}
+  <span class="categories">
+    {% for tag in article.tag.all() %}
+        <a class="category" href="{{ tag.url }}">{{ tag.title }}</a>
+    {% endfor %}
+  </span>
+  {% endif %}
+</p>

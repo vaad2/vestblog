@@ -1,0 +1,17 @@
+*.log
+*.pot
+*.pyc
+.gitignore~
+*.*~
+.idea/*
+*.sqlite
+*.sqlite3
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.ropeproject/
+Vagrantfile
+.vagrant
+dist/*
+build/*
+media/*
